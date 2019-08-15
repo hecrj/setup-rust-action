@@ -1,4 +1,5 @@
 import * as core from '@actions/core';
+import * as exec from '@actions/exec';
 import * as rustup from './rustup';
 import * as os from 'os';
 
@@ -8,6 +9,8 @@ async function run() {
 
     if(version) {
       await rustup.install(version);
+
+      exec.exec('rustup', ['default', version]);
     }
   } catch (error) {
     core.setFailed(error.message);
