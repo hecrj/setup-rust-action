@@ -1,5 +1,5 @@
 name: 'Set up Rust'
-description: 'Install a Rust toolchain and add it to the PATH'
+description: 'Install a specific Rust toolchain and add it to the PATH'
 author: 'Héctor Ramón'
 inputs:
   rust-version:

@@ -1,9 +1,38 @@
-# JavaScript Action Template
+# setup-rust-action
 
-This template offers an easy way to get started writing a javascript action with TypeScript compile time support, unit testing with Jest and using the GitHub Actions Toolkit.
+[![Integration test status](https://github.com/hecrj/setup-rust-action/workflows/Integration%20test/badge.svg)](https://github.com/hecrj/setup-rust-action/actions)
 
-## Getting Started
+Sets up a specific Rust toolchain for use in your GitHub Actions workflows.
 
-See the walkthrough located [here](https://github.com/actions/toolkit/blob/master/docs/javascript-action.md).
+# Usage
 
-In addition to walking your through how to create an action, it also provides strategies for versioning, releasing and referencing your actions.
+Provide a `rust-version` with the desired toolchain version to install.
+
+```yml
+name: Test
+on: [push]
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        rust: [stable, nightly]
+
+    steps:
+    - uses: hecrj/setup-rust-action@master
+      with:
+        rust-version: ${{ matrix.rust }}
+    - uses: actions/checkout@master
+    - name: Run tests
+      run: cargo test --verbose
+```
+
+For more details, check out [`action.yml`].
+
+[`action.yml`]: https://github.com/hecrj/setup-rust-action/blob/master/action.yml
+
+# Contributing / Feedback
+
+Contributions and feedback are welcome! Feel free to open any issues or pull
+requests.
