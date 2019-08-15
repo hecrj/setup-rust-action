@@ -8,6 +8,9 @@ Sets up a specific Rust toolchain for use in your GitHub Actions workflows.
 
 Provide a `rust-version` with the desired toolchain version to install.
 
+You can combine it with `matrix` to test different Rust toolchains in different
+platforms!
+
 ```yml
 name: Test
 on: [push]
