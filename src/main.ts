@@ -6,7 +6,7 @@ async function run() {
   try {
     const version = core.getInput('rust-version');
 
-    if(version && os.platform() != 'win32') {
+    if(version) {
       await rustup.install(version);
     }
   } catch (error) {

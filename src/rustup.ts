@@ -21,8 +21,6 @@ export async function install(version: string) {
 
   toolPath = path.join(toolPath, 'bin');
   core.addPath(toolPath);
-
-  await exec.exec('rustup', ['update']);
 }
 
 async function acquireRust(version: string): Promise<string> {
@@ -36,21 +34,17 @@ async function acquireRust(version: string): Promise<string> {
   }
 
   if(WINDOWS) {
-    // TODO: Fix this
-    // It currently fails with:
-    // error: 'rustup-init.exe' is not installed for the toolchain 'stable-x86_64-pc-windows-msvc'
     await io.cp(script, script + '.exe');
     script += '.exe';
 
-    const powershell = await io.which('powershell', true);
+    console.log(await io.which('rustup', true));
 
     await exec.exec(
       `"${script}"`,
       [
-        '--default-host',
-        'gnu',
+        '-y',
         '--default-toolchain',
-        version,
+        'none',
       ]
     );
   } else {
@@ -64,7 +58,7 @@ async function acquireRust(version: string): Promise<string> {
 
 function rustupUrl(): string {
   if(WINDOWS) {
-    return "https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-gnu/rustup-init.exe"
+    return "https://win.rustup.rs"
   } else {
     return "https://sh.rustup.rs"
   }
