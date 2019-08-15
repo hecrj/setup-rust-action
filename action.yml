@@ -4,7 +4,7 @@ author: 'Héctor Ramón'
 inputs:
   rust-version:
     description: 'The toolchain name, such as stable, nighly, or 1.8.0'
-    default: '1.37.0'
+    default: 'stable'
 runs:
   using: 'node12'
   main: 'lib/main.js'

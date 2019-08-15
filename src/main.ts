@@ -11,6 +11,7 @@ async function run() {
       await rustup.install(version);
 
       exec.exec('rustup', ['default', version]);
+      exec.exec('rustup', ['update', version]);
     }
   } catch (error) {
     core.setFailed(error.message);
