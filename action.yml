@@ -3,7 +3,7 @@ description: 'Install a specific Rust toolchain and add it to the PATH'
 author: 'Héctor Ramón'
 inputs:
   rust-version:
-    description: 'The toolchain name, such as stable, nighly, or 1.8.0'
+    description: 'The toolchain name, such as stable, nightly, or 1.8.0'
     default: 'stable'
 runs:
   using: 'node12'
