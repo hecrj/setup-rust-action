@@ -1,8 +1,8 @@
 {
-  "name": "node12-template-action",
+  "name": "setup-rust-action",
   "version": "0.0.0",
   "private": true,
-  "description": "Node 12 template action",
+  "description": "Set up a specific Rust toolchain in your Github Actions workflows",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -10,14 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/node12-template.git"
+    "url": "git+https://github.com/hecrj/setup-rust-action.git"
   },
   "keywords": [
+    "github",
     "actions",
-    "node",
+    "rust",
     "setup"
   ],
-  "author": "GitHub",
+  "author": "Héctor Ramón",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.0.0",
