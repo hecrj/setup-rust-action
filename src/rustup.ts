@@ -9,7 +9,7 @@ import {chmodSync} from 'fs';
 let tempDirectory = process.env['RUNNER_TEMPDIRECTORY'] || '';
 
 export async function install() {
-  // `rustup` is already installed in
+  // `rustup` is already installed on Linux and Windows platforms
   if (os.platform() == 'darwin') {
     let toolPath = await installOnUnix();
 
