@@ -1,6 +1,6 @@
 # setup-rust-action
 
-[![Integration test status](https://github.com/hecrj/setup-rust-action/workflows/Integration%20test/badge.svg)](https://github.com/hecrj/setup-rust-action/actions)
+[![Integration status](https://github.com/hecrj/setup-rust-action/workflows/Integration/badge.svg)](https://github.com/hecrj/setup-rust-action/actions)
 
 Sets up a specific Rust toolchain for use in your GitHub Actions workflows.
 
@@ -12,7 +12,7 @@ You can combine it with `matrix` to test different Rust toolchains in different
 platforms!
 
 ```yml
-name: Test
+name: Test Rust project
 on: [push]
 jobs:
   test:

@@ -8,30 +8,21 @@ import {chmodSync} from 'fs';
 
 let tempDirectory = process.env['RUNNER_TEMPDIRECTORY'] || '';
 
-export async function install(version: string) {
+export async function install() {
+  // `rustup` is already installed in
   if (os.platform() == 'darwin') {
-    let toolPath = await acquireRust(version);
+    let toolPath = await installOnUnix();
 
-    core.debug('Rust toolchain is cached under ' + toolPath);
-
+    core.debug('rustup is located under: ' + toolPath);
     core.addPath(path.join(toolPath, 'bin'));
   }
 }
 
-async function acquireRust(version: string): Promise<string> {
-  let script: string;
-
-  try {
-    script = await toolCache.downloadTool("https://sh.rustup.rs");
-  } catch (error) {
-    core.debug(error);
-    throw `Failed to download rustup: ${error}`;
-  }
+async function installOnUnix(): Promise<string> {
+  let script = await toolCache.downloadTool("https://sh.rustup.rs");
 
   chmodSync(script, '777');
   await exec.exec(`"${script}"`, ['-y', '--default-toolchain', 'none']);
 
-  let cargo = path.join(process.env['HOME'] || '', '.cargo');
-
-  return await toolCache.cacheDir(cargo, 'rust', version);
+  return path.join(process.env['HOME'] || '', '.cargo');
 }

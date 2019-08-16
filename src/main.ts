@@ -8,7 +8,7 @@ async function run() {
     const version = core.getInput('rust-version');
 
     if(version) {
-      await rustup.install(version);
+      await rustup.install();
       await exec.exec('rustup', ['default', version]);
       await exec.exec('rustup', ['update', version]);
     }

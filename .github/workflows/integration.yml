@@ -1,4 +1,4 @@
-name: Integration test
+name: Integration
 on: [push]
 
 jobs:
@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-        rust: [stable, beta, nightly]
+        rust: [stable, nightly]
     steps:
     - uses: hecrj/setup-rust-action@master
       with:
