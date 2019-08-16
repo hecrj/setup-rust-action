@@ -1,4 +1,4 @@
-name: 'Set up Rust'
+name: 'Set up a Rust toolchain'
 description: 'Install a specific Rust toolchain and add it to the PATH'
 author: 'Héctor Ramón'
 inputs:
@@ -8,3 +8,6 @@ inputs:
 runs:
   using: 'node12'
   main: 'lib/main.js'
+branding:
+  icon: 'download'
+  color: 'blue'
