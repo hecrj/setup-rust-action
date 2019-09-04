@@ -5,6 +5,9 @@ inputs:
   rust-version:
     description: 'The toolchain name, such as stable, nightly, or 1.8.0'
     default: 'stable'
+  components:
+    description: 'The toolchain components to install, comma-separated'
+    default: ''
 runs:
   using: 'node12'
   main: 'lib/main.js'

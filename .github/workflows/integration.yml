@@ -2,8 +2,7 @@ name: Integration
 on:
   push: {}
   schedule:
-    cron: '0 0 * * *'
-
+    - cron: '0 0 * * *'
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -11,11 +10,21 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
         rust: [stable, nightly]
+        include:
+          - os: macOS-latest
+            rust: 'stable'
+            components: 'rustfmt, clippy'
     steps:
     - uses: hecrj/setup-rust-action@master
       with:
         rust-version: ${{ matrix.rust }}
+        components: ${{ matrix.components || '' }}
     - name: Check Cargo availability
       run: cargo --version
     - name: Check Rustup default toolchain
       run: rustup default | grep '${{ matrix.rust }}'
+    - name: Check rustfmt and clippy are available on MacOS
+      if: matrix.os == 'macOS-latest' && matrix.rust == 'stable'
+      run: |
+        cargo fmt --version
+        cargo clippy --version
