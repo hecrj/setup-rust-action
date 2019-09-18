@@ -8,6 +8,9 @@ inputs:
   components:
     description: 'The toolchain components to install, comma-separated'
     default: ''
+  targets:
+    description: 'The toolchain targets to add, comma-separated'
+    default: ''
 runs:
   using: 'node12'
   main: 'lib/main.js'
