@@ -38,3 +38,6 @@ jobs:
       run: |
         cargo fmt --version
         cargo clippy --version
+    - name: Check targets are installed correctly
+      if: matrix.rust == 'stable'
+      run: rustup target list --installed | grep '${{ matrix.targets }}'
