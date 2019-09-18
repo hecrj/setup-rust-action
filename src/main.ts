@@ -10,6 +10,10 @@ async function run() {
       .split(',')
       .map((component) => component.trim())
       .filter((component) => component.length > 0);
+    const targets = core.getInput('targets')
+      .split(',')
+      .map((target) => target.trim())
+      .filter((target) => target.length > 0);
 
     if(version) {
       await rustup.install();
@@ -18,6 +22,10 @@ async function run() {
 
       for(let component of components) {
         await exec.exec('rustup', ['component', 'add', component]);
+      }
+
+      for(let target of targets) {
+        await exec.exec('rustup', ['target', 'add', target]);
       }
     }
   } catch (error) {

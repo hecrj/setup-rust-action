@@ -14,11 +14,21 @@ jobs:
           - os: macOS-latest
             rust: 'stable'
             components: 'rustfmt, clippy'
+            targets: 'x86_64-apple-darwin'
+          - os: windows-latest
+            rust: 'stable'
+            components: 'rustfmt, clippy'
+            targets: 'x86_64-pc-windows-msvc'
+          - os: ubuntu-latest
+            rust: 'stable'
+            components: 'rustfmt, clippy'
+            targets: 'x86_64-unknown-linux-musl'
     steps:
     - uses: hecrj/setup-rust-action@master
       with:
         rust-version: ${{ matrix.rust }}
         components: ${{ matrix.components || '' }}
+        targets: ${{ matrix.targets || '' }}
     - name: Check Cargo availability
       run: cargo --version
     - name: Check Rustup default toolchain
