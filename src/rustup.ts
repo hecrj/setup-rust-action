@@ -1,6 +1,5 @@
 import * as core from '@actions/core';
 import * as exec from '@actions/exec';
-import * as io from '@actions/io';
 import * as toolCache from '@actions/tool-cache';
 import * as path from 'path';
 import * as os from 'os';
@@ -22,7 +21,7 @@ async function installOnUnix(): Promise<string> {
   let script = await toolCache.downloadTool("https://sh.rustup.rs");
 
   chmodSync(script, '777');
-  await exec.exec(`"${script}"`, ['-y', '--default-toolchain', 'none']);
+  await exec.exec(`"${script}"`, ['-y', '--default-toolchain', 'none', '--profile=minimal']);
 
   return path.join(process.env['HOME'] || '', '.cargo');
 }
