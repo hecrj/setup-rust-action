@@ -17,6 +17,11 @@ async function run() {
 
     if(version) {
       await rustup.install();
+      if (os.platform() !== 'darwin') {
+        // update the GitHub managed VM version of rustup
+        // to leverage newer features like "latest latest compatible nightly"
+        await exec.exec('rustup', ['self', 'update']);
+      }
       await exec.exec('rustup', ['default', version]);
       await exec.exec('rustup', ['update', version]);
 
