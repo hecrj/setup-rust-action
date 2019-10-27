@@ -6,10 +6,12 @@ import * as os from 'os';
 async function run() {
   try {
     const version = core.getInput('rust-version');
+
     const components = core.getInput('components')
       .split(',')
       .map((component) => component.trim())
       .filter((component) => component.length > 0);
+
     const targets = core.getInput('targets')
       .split(',')
       .map((target) => target.trim())
@@ -17,16 +19,16 @@ async function run() {
 
     if(version) {
       await rustup.install();
+
+      await exec.exec(
+        'rustup',
+        ['toolchain', 'install', version,
+          ...(components.length > 0 ? ['-c', ...components] : []),
+          ...(targets.length > 0 ? ['-t', ...targets] : []),
+        ]
+      );
+
       await exec.exec('rustup', ['default', version]);
-      await exec.exec('rustup', ['update', version]);
-
-      for(let component of components) {
-        await exec.exec('rustup', ['component', 'add', component]);
-      }
-
-      for(let target of targets) {
-        await exec.exec('rustup', ['target', 'add', target]);
-      }
     }
   } catch (error) {
     core.setFailed(error.message);
