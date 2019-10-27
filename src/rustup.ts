@@ -15,9 +15,11 @@ export async function install() {
     core.debug('rustup is located under: ' + toolPath);
     core.addPath(path.join(toolPath, 'bin'));
   } else {
-    // update the GitHub managed VM version of rustup
+    // Update the GitHub managed VM version of rustup
     // to leverage newer features like "latest latest compatible nightly"
     await exec.exec('rustup', ['self', 'update']);
+
+    await exec.exec('rustup', ['set', 'profile', 'minimal']);
   }
 }
 
