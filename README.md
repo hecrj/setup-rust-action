@@ -31,6 +31,16 @@ jobs:
       run: cargo test --verbose
 ```
 
+## Inputs
+
+The following inputs can be provided with the `jobs.<job_id>.steps.with` yaml key.
+
+| Name         | Required | Description                                            | Type                    | Default |
+|--------------|:--------:|--------------------------------------------------------|-------------------------|---------|
+| rust-version | ✖        | The toolchain name, such as stable, nightly, or 1.8.0  | String                  | stable  |
+| components   | ✖        | The toolchain components to install                    | String, comma-separated |         |
+| targets      | ✖        | The toolchain targets to add                           | String, comma-separated |         |
+
 For more details, check out [`action.yml`].
 
 [`action.yml`]: https://github.com/hecrj/setup-rust-action/blob/master/action.yml
