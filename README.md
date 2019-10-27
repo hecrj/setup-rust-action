@@ -31,7 +31,7 @@ jobs:
       run: cargo test --verbose
 ```
 
-## inputs
+## Inputs
 
 The following inputs can be provided with the `jobs.<job_id>.steps.with` yaml key.
 
