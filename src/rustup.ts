@@ -3,7 +3,7 @@ import * as exec from '@actions/exec';
 import * as toolCache from '@actions/tool-cache';
 import * as path from 'path';
 import * as os from 'os';
-import {chmodSync} from 'fs';
+import {chmodSync, renameSync, existsSync, appendFileSync} from 'fs';
 
 let tempDirectory = process.env['RUNNER_TEMPDIRECTORY'] || '';
 
@@ -20,6 +20,29 @@ export async function install() {
     await exec.exec('rustup', ['self', 'update']);
 
     await exec.exec('rustup', ['set', 'profile', 'minimal']);
+
+    if (os.platform() == 'win32') {
+      let cargoPath = '';
+      {
+        const options = {
+          listeners: {
+            stdout: (data: Buffer) => {
+              cargoPath += data.toString();
+            }
+          }
+        };
+        await exec.exec('where', ['rustup.exe'], options);
+      }
+      let rustupPath = cargoPath.split('\\').slice(0, -3).concat([".rustup"]).join("\\");
+      let defaultClearedFilePath = `${rustupPath}\\default_cleared`;
+
+      if (!existsSync(defaultClearedFilePath)) {
+        // Github's default Windows install comes with rustup pre-installed with stable, including
+        // rust-docs. This removes the default stable install so that it doesn't update rust-docs.
+        renameSync(`${rustupPath}\\toolchains`, `${rustupPath}\\_toolchains`);
+        appendFileSync(defaultClearedFilePath, '');
+      }
+    }
   }
 }
 
