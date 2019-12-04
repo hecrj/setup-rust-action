@@ -24,21 +24,23 @@ export async function install() {
     await exec.exec('rustup', ['set', 'profile', 'minimal']);
 
     if (os.platform() == 'win32') {
-      let rustDocsInstalled = false;
-      {
-        let installedComponents = '';
-        const options = {
-          listeners: {
-            stdout: (data: Buffer) => {
-              installedComponents += data.toString();
-            }
-          }
-        };
-        await exec.exec('rustup', ['component', 'list'], options);
-        rustDocsInstalled = installedComponents.match(/rust-docs.+\(installed\)/) != null;
-      }
+      let clearedEnvVar = '__SETUP_RUST_ACTION_DEFAULT_INSTALL_CLEARED';
+      // let rustDocsInstalled = false;
+      // {
+      //   let installedComponents = '';
+      //   const options = {
+      //     listeners: {
+      //       stdout: (data: Buffer) => {
+      //         installedComponents += data.toString();
+      //       }
+      //     }
+      //   };
+      //   await exec.exec('rustup', ['component', 'list'], options);
+      //   rustDocsInstalled = installedComponents.match(/rust-docs.+\(installed\)/) != null;
+      // }
 
-      if (rustDocsInstalled) {
+      // If the rust-docs component isn't installed,
+      if (process.env[clearedEnvVar] == null) {
         let cargoPath = '';
         {
           const options = {
@@ -54,6 +56,7 @@ export async function install() {
         // Github's default Windows install comes with rustup pre-installed with stable, including
         // rust-docs. This removes the default stable install so that it doesn't update rust-docs.
         await renameAsync(`${rustupPath}\\toolchains`, `${rustupPath}\\_toolchains`);
+        await exec.exec('setx', [clearedEnvVar, "1"]);
       }
     }
   }
