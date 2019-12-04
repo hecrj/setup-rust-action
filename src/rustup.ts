@@ -20,6 +20,9 @@ export async function install() {
     await exec.exec('rustup', ['self', 'update']);
 
     await exec.exec('rustup', ['set', 'profile', 'minimal']);
+    // Github's default Windows install comes with rustup pre-installed with stable, including
+    // rust-docs. This removes the default stable install so that it doesn't update rust-docs.
+    await exec.exec('rustup', ['toolchain', 'uninstall', 'stable']);
   }
 }
 
