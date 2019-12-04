@@ -3,9 +3,11 @@ import * as exec from '@actions/exec';
 import * as toolCache from '@actions/tool-cache';
 import * as path from 'path';
 import * as os from 'os';
-import {chmodSync} from 'fs';
+import {chmodSync, rename} from 'fs';
+import {promisify} from 'util';
 
 let tempDirectory = process.env['RUNNER_TEMPDIRECTORY'] || '';
+const renameAsync = promisify(rename);
 
 export async function install() {
   // `rustup` is already installed on Linux and Windows platforms
@@ -20,9 +22,40 @@ export async function install() {
     await exec.exec('rustup', ['self', 'update']);
 
     await exec.exec('rustup', ['set', 'profile', 'minimal']);
-    // Github's default Windows install comes with rustup pre-installed with stable, including
-    // rust-docs. This removes the default stable install so that it doesn't update rust-docs.
-    await exec.exec('rustup', ['toolchain', 'uninstall', 'stable']);
+
+    if (os.platform() == 'win32') {
+      let rustDocsInstalled = false;
+      {
+        let installedComponents = '';
+        const options = {
+          listeners: {
+            stdout: (data: Buffer) => {
+              installedComponents += data.toString();
+            }
+          }
+        };
+        await exec.exec('rustup', ['component', 'list'], options);
+        rustDocsInstalled = installedComponents.match(/rust-docs.+\(installed\)/) != null;
+      }
+
+      if (rustDocsInstalled) {
+        let cargoPath = '';
+        {
+          const options = {
+            listeners: {
+              stdout: (data: Buffer) => {
+                cargoPath += data.toString();
+              }
+            }
+          };
+          await exec.exec('where', ['rustup.exe'], options);
+        }
+        let rustupPath = cargoPath.split('\\').slice(0, -3).concat([".rustup"]).join("\\");
+        // Github's default Windows install comes with rustup pre-installed with stable, including
+        // rust-docs. This removes the default stable install so that it doesn't update rust-docs.
+        await renameAsync(`${rustupPath}\\toolchains`, `${rustupPath}\\_toolchains`);
+      }
+    }
   }
 }
 
