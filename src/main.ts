@@ -1,7 +1,7 @@
 import * as core from '@actions/core';
 import * as exec from '@actions/exec';
 import * as rustup from './rustup';
-import * as os from 'os';
+import * as path from 'path';
 
 async function run() {
   try {
@@ -30,6 +30,10 @@ async function run() {
 
       await exec.exec('rustup', ['default', version]);
     }
+
+    const matchersPath = path.join(__dirname, '..', '.github');
+    console.log(`##[add-matcher]${path.join(matchersPath, 'go.json')}`);
+
   } catch (error) {
     core.setFailed(error.message);
   }
