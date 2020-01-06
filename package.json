@@ -5,7 +5,7 @@
   "description": "Set up a specific Rust toolchain in your Github Actions workflows",
   "main": "lib/main.js",
   "scripts": {
-    "build": "tsc",
+    "build": "ncc build src/main.ts --minify",
     "test": "jest"
   },
   "repository": {
@@ -32,6 +32,7 @@
     "@types/jest": "^24.0.13",
     "@types/node": "^12.12.14",
     "@types/semver": "^6.0.0",
+    "@zeit/ncc": "^0.21.0",
     "jest": "^24.8.0",
     "jest-circus": "^24.7.1",
     "ts-jest": "^24.0.2",
