@@ -45,6 +45,17 @@ For more details, check out [`action.yml`].
 
 [`action.yml`]: https://github.com/hecrj/setup-rust-action/blob/master/action.yml
 
+
+## Problem Matchers
+
+This action registers the following [problem matchers](https://github.com/actions/toolkit/blob/master/docs/problem-matchers.md) to surface relavant information inline with changeset diffs.
+
+* `cargo-common` matches common cases of errors and warnings
+* `cargo-test` matches cargo test errors
+* `cargo-fmt` matches rust format errors
+
+To disable any or all of these you can use the `remove-matcher` directive documented [here](https://github.com/actions/toolkit/blob/master/docs/commands.md#problem-matchers)
+
 # Contributing / Feedback
 
 Contributions and feedback are welcome! Feel free to open any issues or pull
