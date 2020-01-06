@@ -8,8 +8,7 @@ Sets up a specific Rust toolchain for use in your GitHub Actions workflows.
 
 Provide a `rust-version` with the desired toolchain version to install.
 
-You can combine it with `matrix` to test different Rust toolchains in different
-platforms!
+You can combine it with `matrix` to test different Rust toolchains in different platforms!
 
 ```yml
 name: Test Rust project
@@ -48,15 +47,14 @@ For more details, check out [`action.yml`].
 
 ## Problem Matchers
 
-This action registers the following [problem matchers](https://github.com/actions/toolkit/blob/master/docs/problem-matchers.md) to surface relavant information inline with changeset diffs.
+This action registers the following [problem matchers](https://github.com/actions/toolkit/blob/master/docs/problem-matchers.md) to surface relevant information inline with changeset diffs.
 
 * `cargo-common` matches common cases of errors and warnings
 * `cargo-test` matches cargo test errors
 * `cargo-fmt` matches rust format errors
 
-To disable any or all of these you can use the `remove-matcher` directive documented [here](https://github.com/actions/toolkit/blob/master/docs/commands.md#problem-matchers)
+To disable any or all of these you can use the `remove-matcher` directive documented [here](https://github.com/actions/toolkit/blob/master/docs/commands.md#problem-matchers).
 
 # Contributing / Feedback
 
-Contributions and feedback are welcome! Feel free to open any issues or pull
-requests.
+Contributions and feedback are welcome! Feel free to open any issues or pull requests.
