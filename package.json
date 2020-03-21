@@ -29,13 +29,13 @@
     "semver": "^6.1.1"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.13",
-    "@types/node": "^12.12.14",
-    "@types/semver": "^6.0.0",
-    "@zeit/ncc": "^0.21.0",
-    "jest": "^24.8.0",
-    "jest-circus": "^24.7.1",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.5.1"
+    "@types/jest": "^24.9.1",
+    "@types/node": "^12.12.30",
+    "@types/semver": "^6.2.1",
+    "@zeit/ncc": "^0.21.1",
+    "jest": "^24.9.0",
+    "jest-circus": "^24.9.0",
+    "ts-jest": "^24.3.0",
+    "typescript": "^3.8.3"
   }
 }
