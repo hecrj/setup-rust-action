@@ -34,11 +34,11 @@ jobs:
 
 The following inputs can be provided with the `jobs.<job_id>.steps.with` yaml key.
 
-| Name         | Required | Description                                            | Type                    | Default |
-|--------------|:--------:|--------------------------------------------------------|-------------------------|---------|
-| rust-version | ✖        | The toolchain name, such as stable, nightly, or 1.8.0  | String                  | stable  |
-| components   | ✖        | The toolchain components to install                    | String, comma-separated |         |
-| targets      | ✖        | The toolchain targets to add                           | String, comma-separated |         |
+| Name         | Optional                  | Description                                            | Type                    | Default |
+|--------------|:-------------------------:|--------------------------------------------------------|-------------------------|---------|
+| rust-version | :heavy_check_mark:        | The toolchain name, such as stable, nightly, or 1.8.0  | String                  | stable  |
+| components   | :heavy_check_mark:        | The toolchain components to install                    | String, comma-separated |         |
+| targets      | :heavy_check_mark:        | The toolchain targets to add                           | String, comma-separated |         |
 
 For more details, check out [`action.yml`].
 
