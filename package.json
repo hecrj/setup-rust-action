@@ -28,8 +28,8 @@
     "semver": "^6.1.1"
   },
   "devDependencies": {
-    "@types/node": "^12.12.54",
-    "@types/semver": "^6.2.1",
+    "@types/node": "^12.12.64",
+    "@types/semver": "^6.2.2",
     "@zeit/ncc": "^0.21.1",
     "typescript": "^3.9.7"
   }
