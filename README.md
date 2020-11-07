@@ -40,6 +40,17 @@ The following inputs can be provided with the `jobs.<job_id>.steps.with` yaml ke
 | components   | :heavy_check_mark:        | The toolchain components to install                    | String, comma-separated |         |
 | targets      | :heavy_check_mark:        | The toolchain targets to add                           | String, comma-separated |         |
 
+## Outputs
+
+The following outputs can be accessed with the `${{ steps.<step_id>.outputs.<name> }}` expression.
+
+| Name       | Description                                                   |
+|------------|---------------------------------------------------------------|
+| rustc      | The installed rustc version, `rustc -V`                       |
+| rustc_hash | The installed rustc version hash, useful for caching purposes |
+| cargo      | The installed cargo version, `cargo -V`                       |
+| rustup     | The installed rustup version, `rustup -V`                     |
+
 For more details, check out [`action.yml`].
 
 [`action.yml`]: https://github.com/hecrj/setup-rust-action/blob/master/action.yml
