@@ -1,6 +1,7 @@
 import * as core from '@actions/core';
 import * as exec from '@actions/exec';
 import * as rustup from './rustup';
+import * as versions from './versions';
 import * as path from 'path';
 
 async function run() {
@@ -34,6 +35,7 @@ async function run() {
     const matchersPath = path.join(__dirname, '..', '.github');
     console.log(`##[add-matcher]${path.join(matchersPath, 'rust.json')}`);
 
+    await versions.gatherInstalledVersions();
   } catch (error) {
     core.setFailed(error.message);
   }

@@ -25,6 +25,7 @@ jobs:
             targets: 'x86_64-unknown-linux-musl'
     steps:
     - uses: hecrj/setup-rust-action@master
+      id: setup
       with:
         rust-version: ${{ matrix.rust }}
         components: ${{ matrix.components || '' }}
@@ -41,3 +42,9 @@ jobs:
     - name: Check targets are installed correctly
       if: matrix.rust == 'stable'
       run: rustup target list --installed | grep '${{ matrix.targets }}'
+    - name: Check action output
+      shell: bash
+      run: |
+        test -n "${{ steps.setup.outputs.rustc }}"
+        test -n "${{ steps.setup.outputs.cargo }}"
+        test -n "${{ steps.setup.outputs.rustup }}"
