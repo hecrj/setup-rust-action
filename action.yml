@@ -11,6 +11,15 @@ inputs:
   targets:
     description: 'The toolchain targets to add, comma-separated'
     default: ''
+outputs:
+  rustc:
+    description: 'The installed rustc version'
+  rustc_hash:
+    description: 'The installed rustc version hash, useful for cache purposes'
+  cargo:
+    description: 'The installed Cargo version'
+  rustup:
+    description: 'The installed rustup version'
 runs:
   using: 'node12'
   main: 'dist/index.js'
