@@ -1,19 +1,69 @@
-name: 'Set up a Rust toolchain'
-description: 'Install a specific Rust toolchain and add it to the PATH'
-author: 'Héctor Ramón'
-inputs:
-  rust-version:
-    description: 'The toolchain name, such as stable, nightly, or 1.8.0'
-    default: 'stable'
-  components:
-    description: 'The toolchain components to install, comma-separated'
-    default: ''
-  targets:
-    description: 'The toolchain targets to add, comma-separated'
-    default: ''
-runs:
-  using: 'node16'
-  main: 'dist/index.js'
+name: Setup Rust toolchain
+author: Jacob Hummer <jcbhmr@outlook.com>
+description: 🦀 Setup the Rust toolchain for GitHub Actions
 branding:
-  icon: 'download'
-  color: 'blue'
+  color: blue
+  icon: package
+inputs:
+  toolchain-version:
+    description: >
+      Which version of the Rust toolchain to install. You can choose from
+      'stable', 'beta', 'nightly', or a specific version number. This is passed
+      to the 'rustup toolchain install' command. Default is 'stable'.
+    required: true
+    default: stable
+  profile:
+    description: >
+      Which profile to use for the Rust toolchain. You can choose from
+      'default', 'minimal', or 'complete'. This is passed to the installation
+      command. Default is 'default'.
+    required: true
+    default: default
+  component:
+    description: Alias for 'components'.
+  components:
+    description: >
+      Which components to install for the Rust toolchain. There's so many! The
+      highlights are 'rustfmt', 'clippy', and 'rust-analysis'. This is passed to
+      the installation command. Default is empty (use profile defaults).
+    required: true
+    default: ''
+  target:
+    description: Alias for 'targets'.
+  targets:
+    description: >
+      Which targets to install for the Rust toolchain. Choose any valid target
+      triple like 'x86_64-unknown-linux-gnu' or 'wasm32-unknown-unknown'. This
+      is passed as the '--target' flag when installing the Rust toolchain. The
+      default is empty (use current platform).
+    required: true
+    default: ''
+outputs:
+  rustup_version:
+    description: >
+      The version of rustup that was installed. This is the output of the
+      'rustup --version' command.
+    value: ${{ steps.main.outputs.rustup_version }}
+  cargo_version:
+    description: >
+      The version of cargo that was installed. This is the output of the
+      'cargo --version' command.
+    value: ${{ steps.main.outputs.cargo_version }}
+  rustc_version:
+    description: >
+      The version of rustc that was installed. This is the output of the
+      'rustc --version' command.
+    value: ${{ steps.main.outputs.rustc_version }}
+runs:
+  using: composite
+  steps:
+    - id: main
+      run: '"${GITHUB_ACTION_PATH%/}/index.sh"'
+      shell: bash
+      env:
+        INPUT_TOOLCHAIN_VERSION: ${{ inputs.toolchain-version }}
+        INPUT_PROFILE: ${{ inputs.profile }}
+        INPUT_COMPONENT: ${{ inputs.component }}
+        INPUT_COMPONENTS: ${{ inputs.components }}
+        INPUT_TARGET: ${{ inputs.target }}
+        INPUT_TARGETS: ${{ inputs.targets }}

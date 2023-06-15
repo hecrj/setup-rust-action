@@ -1,0 +1,39 @@
+name: Test
+on:
+  push:
+    branches: $default-branch
+    paths-ignore:
+      - docs/**
+      - wiki/**
+      - .github/**
+      - "!.github/workflows/test.yml"
+      - .gitignore
+      - LICENSE
+      - README.md
+  pull_request:
+    paths-ignore:
+      - docs/**
+      - wiki/**
+      - .github/**
+      - "!.github/workflows/test.yml"
+      - .gitignore
+      - LICENSE
+      - README.md
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  test-shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ludeeus/action-shellcheck@master
+  test-action:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./

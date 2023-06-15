@@ -1,60 +1,70 @@
-# setup-rust-action
+# Setup Rust
 
-[![Integration status](https://github.com/hecrj/setup-rust-action/workflows/Integration/badge.svg)](https://github.com/hecrj/setup-rust-action/actions)
+🦀 Setup the Rust toolchain for GitHub Actions
 
-Sets up a specific Rust toolchain for use in your GitHub Actions workflows.
+<div align="center">
 
-# Usage
+![](https://picsum.photos/600/400)
 
-Provide a `rust-version` with the desired toolchain version to install.
+</div>
 
-You can combine it with `matrix` to test different Rust toolchains in different platforms!
+0️⃣ Zero-config &mdash; sensible defaults! \
+📦 Installs Rust using the `rustup` toolchain manager \
+🧰 Customizable with input options
+
+
+## Usage
+
+![GitHub Actions](https://img.shields.io/static/v1?style=for-the-badge&message=GitHub+Actions&color=2088FF&logo=GitHub+Actions&logoColor=FFFFFF&label=)
+![GitHub](https://img.shields.io/static/v1?style=for-the-badge&message=GitHub&color=181717&logo=GitHub&logoColor=FFFFFF&label=)
+
+The easiest way to get started is to just plonk the following in your workflow:
 
 ```yml
-name: Test Rust project
-on: [push]
-jobs:
-  test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
-        rust: [stable, nightly]
-
-    steps:
-    - uses: hecrj/setup-rust-action@v1
-      with:
-        rust-version: ${{ matrix.rust }}
-    - uses: actions/checkout@master
-    - name: Run tests
-      run: cargo test --verbose
+- uses: jcbhmr/setup-rust-action
 ```
 
-## Inputs
+This will use the latest stable version of Rust and install everything that the
+normal `rustup` installer would. 😎 If you prefer a more minimal installation,
+you can use the `minimal` profile:
 
-The following inputs can be provided with the `jobs.<job_id>.steps.with` yaml key.
+```yml
+- uses: jcbhmr/setup-rust-action@v1
+  with:
+    profile: minimal
+```
 
-| Name         | Optional                  | Description                                            | Type                    | Default |
-|--------------|:-------------------------:|--------------------------------------------------------|-------------------------|---------|
-| rust-version | :heavy_check_mark:        | The toolchain name, such as stable, nightly, or 1.8.0  | String                  | stable  |
-| components   | :heavy_check_mark:        | The toolchain components to install                    | String, comma-separated |         |
-| targets      | :heavy_check_mark:        | The toolchain targets to add                           | String, comma-separated |         |
+### Inputs
 
-For more details, check out [`action.yml`].
+- **`toolchain-version`:** Which version of the Rust toolchain to install. You
+  can choose from `stable`, `beta`, `nightly`, or a specific version number.
+  This is passed to the `rustup toolchain install` command. Default is `stable`.
 
-[`action.yml`]: https://github.com/hecrj/setup-rust-action/blob/master/action.yml
+- **`profile`:** Which profile to use for the Rust toolchain. You can choose
+  from `default`, `minimal`, or `complete`. This is passed to the installation
+  command. Default is `default`.
 
+- **`component`:** Alias for `components`.
 
-## Problem Matchers
+- **`components`:** Which components to install for the Rust toolchain.
+  There`s so many! The highlights are `rustfmt`, `clippy`, and `rust-analysis`.
+  This is passed to the installation command. Default is empty (use profile
+  defaults).
 
-This action registers the following [problem matchers](https://github.com/actions/toolkit/blob/master/docs/problem-matchers.md) to surface relevant information inline with changeset diffs.
+- **`target`:** Alias for `targets`.
 
-* `cargo-common` matches common cases of errors and warnings
-* `cargo-test` matches cargo test errors
-* `cargo-fmt` matches rust format errors
+- **`targets`:** Which targets to install for the Rust toolchain. Choose any
+  valid target triple like `x86_64-unknown-linux-gnu` or
+  `wasm32-unknown-unknown`. This is passed as the `--target` flag when
+  installing the Rust toolchain. The default is empty (use current platform).
 
-To disable any or all of these you can use the `remove-matcher` directive documented [here](https://github.com/actions/toolkit/blob/master/docs/commands.md#problem-matchers).
+### Outputs
 
-# Contributing / Feedback
+- **`rustup_version`:** The version of rustup that was installed. This is the
+  output of the `rustup --version` command.
 
-Contributions and feedback are welcome! Feel free to open any issues or pull requests.
+- **`cargo_version`:** The version of cargo that was installed. This is the
+  output of the `cargo --version` command.
+
+- **`rustc_version`:** The version of rustc that was installed. This is the
+  output of the `rustc --version` command.
