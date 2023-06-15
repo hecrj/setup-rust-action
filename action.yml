@@ -1,5 +1,5 @@
-name: Setup Rust toolchain
-author: Jacob Hummer <jcbhmr@outlook.com>
+name: Set up a Rust toolchain
+author: Héctor Ramón <hector0193@gmail.com>
 description: 🦀 Setup the Rust toolchain for GitHub Actions
 branding:
   color: blue
