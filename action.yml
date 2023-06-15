@@ -25,9 +25,10 @@ inputs:
     description: >
       Which components to install for the Rust toolchain. There's so many! The
       highlights are 'rustfmt', 'clippy', and 'rust-analysis'. This is passed to
-      the installation command. Default is empty (use profile defaults).
+      the installation command. Default is empty (use profile defaults). Use a
+      space-separated list to install multiple components.
     required: true
-    default: ''
+    default: ""
   target:
     description: Alias for 'targets'.
   targets:
@@ -35,9 +36,10 @@ inputs:
       Which targets to install for the Rust toolchain. Choose any valid target
       triple like 'x86_64-unknown-linux-gnu' or 'wasm32-unknown-unknown'. This
       is passed as the '--target' flag when installing the Rust toolchain. The
-      default is empty (use current platform).
+      default is empty (use current platform). Use a space-separated list to
+      install multiple targets.
     required: true
-    default: ''
+    default: ""
 outputs:
   rustup_version:
     description: >
@@ -46,13 +48,13 @@ outputs:
     value: ${{ steps.main.outputs.rustup_version }}
   cargo_version:
     description: >
-      The version of cargo that was installed. This is the output of the
-      'cargo --version' command.
+      The version of cargo that was installed. This is the output of the 'cargo
+      --version' command.
     value: ${{ steps.main.outputs.cargo_version }}
   rustc_version:
     description: >
-      The version of rustc that was installed. This is the output of the
-      'rustc --version' command.
+      The version of rustc that was installed. This is the output of the 'rustc
+      --version' command.
     value: ${{ steps.main.outputs.rustc_version }}
 runs:
   using: composite

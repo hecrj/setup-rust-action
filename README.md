@@ -12,7 +12,6 @@
 📦 Installs Rust using the `rustup` toolchain manager \
 🧰 Customizable with input options
 
-
 ## Usage
 
 ![GitHub Actions](https://img.shields.io/static/v1?style=for-the-badge&message=GitHub+Actions&color=2088FF&logo=GitHub+Actions&logoColor=FFFFFF&label=)
@@ -64,7 +63,7 @@ you can use the `minimal` profile:
 - **`components`:** Which components to install for the Rust toolchain.
   There`s so many! The highlights are `rustfmt`, `clippy`, and `rust-analysis`.
   This is passed to the installation command. Default is empty (use profile
-  defaults).
+  defaults). Use a space-separated list to install multiple components.
 
 - **`target`:** Alias for `targets`.
 
@@ -72,6 +71,7 @@ you can use the `minimal` profile:
   valid target triple like `x86_64-unknown-linux-gnu` or
   `wasm32-unknown-unknown`. This is passed as the `--target` flag when
   installing the Rust toolchain. The default is empty (use current platform).
+  Use a space-separated list to install multiple targets.
 
 ### Outputs
 
