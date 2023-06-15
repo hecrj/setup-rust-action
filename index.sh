@@ -11,7 +11,9 @@ echo "$HOME/.cargo/bin" >>"$GITHUB_PATH"
 components=${INPUT_COMPONENTS:-$INPUT_COMPONENT}
 targets=${INPUT_TARGETS:-$INPUT_TARGET}
 args=()
+# shellcheck disable=SC2206
 [[ -n $components ]] && args+=(-c $components)
+# shellcheck disable=SC2206
 [[ -n $targets ]] && args+=(-t $targets)
 rustup toolchain install "$INPUT_TOOLCHAIN_VERSION" \
   --profile "$INPUT_PROFILE" "${args[@]}"
