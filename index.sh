@@ -18,6 +18,7 @@ args=()
 rustup toolchain install "$INPUT_TOOLCHAIN_VERSION" \
   --profile "$INPUT_PROFILE" "${args[@]}"
 
+# shellcheck disable=SC2129
 echo "rustup_version=$(rustup --version)" >>"$GITHUB_OUTPUT"
 echo "cargo_version=$(cargo --version)" >>"$GITHUB_OUTPUT"
 echo "rustc_version=$(rustc --version)" >>"$GITHUB_OUTPUT"
