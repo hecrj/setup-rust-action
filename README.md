@@ -20,7 +20,7 @@
 The easiest way to get started is to just plonk the following in your workflow:
 
 ```yml
-- uses: jcbhmr/setup-rust-action@v1
+- uses: hecrj/setup-rust-action@v2
 ```
 
 <details><summary>📄 Full <code>cargo test</code> example</summary>
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: jcbhmr/setup-rust-action@v1
+      - uses: hecrj/setup-rust-action@v2
       - run: cargo test
 ```
 
@@ -43,7 +43,7 @@ normal `rustup` installer would. 😎 If you prefer a more minimal installation,
 you can use the `minimal` profile:
 
 ```yml
-- uses: jcbhmr/setup-rust-action@v1
+- uses: hecrj/setup-rust-action@v2
   with:
     profile: minimal
 ```
