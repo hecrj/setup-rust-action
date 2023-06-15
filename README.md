@@ -61,7 +61,7 @@ you can use the `minimal` profile:
 - **`component`:** Alias for `components`.
 
 - **`components`:** Which components to install for the Rust toolchain.
-  There`s so many! The highlights are `rustfmt`, `clippy`, and `rust-analysis`.
+  There's so many! The highlights are `rustfmt`, `clippy`, and `rust-analysis`.
   This is passed to the installation command. Default is empty (use profile
   defaults). Use a space-separated list to install multiple components.
 
