@@ -24,6 +24,21 @@ The easiest way to get started is to just plonk the following in your workflow:
 - uses: jcbhmr/setup-rust-action
 ```
 
+<details><summary>📄 Full <code>cargo test</code> example</summary>
+
+```yml
+on: push
+jobs:
+  test-cargo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: jcbhmr/setup-rust-action@v1
+      - run: cargo test
+```
+
+</details>
+
 This will use the latest stable version of Rust and install everything that the
 normal `rustup` installer would. 😎 If you prefer a more minimal installation,
 you can use the `minimal` profile:
