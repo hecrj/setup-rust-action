@@ -1,4 +1,4 @@
-name: Setup Rust toolchain
+name: Setup Rust environment
 author: Jacob Hummer <jcbhmr@outlook.com>
 description: 🦀 Setup the Rust toolchain for GitHub Actions
 branding:
