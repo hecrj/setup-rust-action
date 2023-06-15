@@ -22,4 +22,4 @@ rustup toolchain install "$INPUT_TOOLCHAIN_VERSION" \
 echo "rustup_version=$(rustup --version)" >>"$GITHUB_OUTPUT"
 echo "cargo_version=$(cargo --version)" >>"$GITHUB_OUTPUT"
 echo "rustc_version=$(rustc --version)" >>"$GITHUB_OUTPUT"
-echo "::add-matcher::${GITHUB_ACTION_PATH%/}rust-matcher.json"
+echo "::add-matcher::${GITHUB_ACTION_PATH%/}/rust-matcher.json"
