@@ -20,7 +20,7 @@
 The easiest way to get started is to just plonk the following in your workflow:
 
 ```yml
-- uses: jcbhmr/setup-rust-action
+- uses: jcbhmr/setup-rust-action@v1
 ```
 
 <details><summary>📄 Full <code>cargo test</code> example</summary>
