@@ -8,6 +8,9 @@ inputs:
   rust-version:
     description: The toolchain version; such as stable, nightly, or 1.8.0
     default: stable
+  profile:
+    description: The toolchain profile to install
+    default: default
   components:
     description: The toolchain components to install, comma-separated
     default: ""
@@ -22,5 +25,6 @@ runs:
       shell: bash
       env:
         INPUT_RUST_VERSION: ${{ inputs.rust-version }}
+        INPUT_PROFILE: ${{ inputs.profile }}
         INPUT_COMPONENTS: ${{ inputs.components }}
         INPUT_TARGETS: ${{ inputs.targets }}

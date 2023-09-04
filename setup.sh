@@ -12,7 +12,7 @@ args=()
 # shellcheck disable=SC2206
 [[ -n "${INPUT_TARGETS}" ]] && args+=(-t "${INPUT_TARGETS// /}")
 
-rustup toolchain install "${INPUT_RUST_VERSION}" "${args[@]}"
+rustup toolchain install "${INPUT_RUST_VERSION}" --profile "${INPUT_PROFILE}" "${args[@]}"
 rustup default "${INPUT_RUST_VERSION}"
 
 # shellcheck disable=SC2129
