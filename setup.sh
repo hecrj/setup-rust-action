@@ -13,6 +13,7 @@ args=()
 [[ -n "${INPUT_TARGETS}" ]] && args+=(-t "${INPUT_TARGETS// /}")
 
 rustup toolchain install "${INPUT_RUST_VERSION}" "${args[@]}"
+rustup default "${INPUT_RUST_VERSION}"
 
 # shellcheck disable=SC2129
 echo "rustup_version=$(rustup --version)" >> $GITHUB_OUTPUT
