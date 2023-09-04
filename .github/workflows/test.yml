@@ -25,7 +25,7 @@ jobs:
             components: rustfmt, clippy
             targets: x86_64-unknown-linux-musl
     steps:
-    - uses: hecrj/setup-rust-action@use-bash
+    - uses: hecrj/setup-rust-action@master
       with:
         rust-version: ${{ matrix.rust }}
         components: ${{ matrix.components || '' }}
