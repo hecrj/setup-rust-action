@@ -22,7 +22,7 @@ jobs:
         rust: [stable, nightly]
 
     steps:
-    - uses: hecrj/setup-rust-action@v1
+    - uses: hecrj/setup-rust-action@v2
       with:
         rust-version: ${{ matrix.rust }}
     - uses: actions/checkout@master

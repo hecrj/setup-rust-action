@@ -1,10 +1,11 @@
-name: Integration
+name: Test
 on:
-  push: {}
+  push:
+    branches: '*'
   schedule:
     - cron: '0 0 * * *'
 jobs:
-  test:
+  setup:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -12,26 +13,26 @@ jobs:
         rust: [stable, nightly]
         include:
           - os: macOS-latest
-            rust: 'stable'
-            components: 'rustfmt, clippy'
-            targets: 'x86_64-apple-darwin'
+            rust: stable
+            components: rustfmt, clippy
+            targets: x86_64-apple-darwin
           - os: windows-latest
-            rust: 'stable'
-            components: 'rustfmt, clippy'
-            targets: 'x86_64-pc-windows-msvc'
+            rust: stable
+            components: rustfmt, clippy
+            targets: x86_64-pc-windows-msvc
           - os: ubuntu-latest
-            rust: 'stable'
-            components: 'rustfmt, clippy'
-            targets: 'x86_64-unknown-linux-musl'
+            rust: stable
+            components: rustfmt, clippy
+            targets: x86_64-unknown-linux-musl
     steps:
-    - uses: hecrj/setup-rust-action@master
+    - uses: hecrj/setup-rust-action@use-bash
       with:
         rust-version: ${{ matrix.rust }}
         components: ${{ matrix.components || '' }}
         targets: ${{ matrix.targets || '' }}
-    - name: Check Cargo availability
+    - name: Check cargo availability
       run: cargo --version
-    - name: Check Rustup default toolchain
+    - name: Check rustup default toolchain
       run: rustup default | grep '${{ matrix.rust }}'
     - name: Check rustfmt and clippy are available on MacOS
       if: matrix.os == 'macOS-latest' && matrix.rust == 'stable'

@@ -1,19 +1,26 @@
-name: 'Set up a Rust toolchain'
-description: 'Install a specific Rust toolchain and add it to the PATH'
-author: 'Héctor Ramón'
+name: Set up a Rust toolchain
+description: Install a specific Rust toolchain and add it to the PATH
+author: Héctor Ramón Jiménez <hector@hecrj.dev>
+branding:
+  icon: package
+  color: blue
 inputs:
   rust-version:
-    description: 'The toolchain name, such as stable, nightly, or 1.8.0'
-    default: 'stable'
+    description: The toolchain version; such as stable, nightly, or 1.8.0
+    default: stable
   components:
-    description: 'The toolchain components to install, comma-separated'
-    default: ''
+    description: The toolchain components to install, comma-separated
+    default: ""
   targets:
-    description: 'The toolchain targets to add, comma-separated'
-    default: ''
+    description: The toolchain targets to add, comma-separated
+    default: ""
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
-branding:
-  icon: 'download'
-  color: 'blue'
+  using: composite
+  steps:
+    - id: setup
+      run: '"${GITHUB_ACTION_PATH%/}/setup.sh"'
+      shell: bash
+      env:
+        INPUT_RUST_VERSION: ${{ inputs.rust-version }}
+        INPUT_COMPONENTS: ${{ inputs.components }}
+        INPUT_TARGETS: ${{ inputs.targets }}
